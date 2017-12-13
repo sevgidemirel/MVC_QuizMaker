@@ -1,0 +1,226 @@
+﻿@model List<SınavProjesi.Models.Quiz>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konuşarak Öğren</title>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("#Title").change(function () {
+                $("#lblDes").empty();
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: '@Url.Action("GetTitleDescription")',
+                    dataType: 'json',
+                    data: { Title: $("#Title").val() },
+                    success: function (titledescription) {
+                        $.each(titledescription, function (i, obj) {
+                            $('#lblDes').text(obj.Description);
+
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Error : ' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+    </script>
+
+    <style>
+        .shape {
+            color: cornflowerblue;
+            font-weight: bold;
+            background-color: lightgoldenrodyellow;
+        }
+
+        .ayrac {
+            margin: 30px;
+        }
+
+        .middle {
+            display: block;
+            margin: auto;
+            width: 200px;
+        }
+
+        .option{
+            margin-top:10px;
+            font-size:medium;
+            color:pink;
+        }
+    </style>
+
+</head>
+
+
+
+<body> 
+    
+    @using (Html.BeginForm("Create", "Quiz", FormMethod.Post)) {   <br />
+    <br />
+
+
+  
+        <div style="font-size:larger; width: 200px;">
+            @Html.DropDownList("Title", null, new { style = "width:410;" })
+        </div>
+   
+        <br />
+
+        <div style="font-size:larger; width: 100%;">
+            @Html.Label("Description", new { id = "lblDes" })
+        </div>
+        <div class="ayrac"></div>
+
+        @Html.TextBoxFor(model => model[0].QuestionExam, new { @class = "form-control shape", @placeholder = "Soru 1:" })
+        @Html.ValidationMessageFor(model => model[0].QuestionExam, "", new { @class = "error" })
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("A:") @Html.TextBoxFor(model => model[0].AnswerText, new { @class = "form-control", @placeholder = "A" })
+                    @Html.ValidationMessageFor(model => model[0].AnswerText, "", new { @class = "error" })
+                </div>
+
+                <div class="col-md-6">
+                    @Html.Label("B:") @Html.TextBoxFor(model => model[1].AnswerText, new { @class = "form-control", @placeholder = "B" })
+                    @Html.ValidationMessageFor(model => model[1].AnswerText, "", new { @class = "error" })
+                </div>
+
+
+                <div class="col-md-6">
+                    @Html.Label("C:") @Html.TextBoxFor(model => model[2].AnswerText, new { @class = "form-control", @placeholder = "C" })
+                    @Html.ValidationMessageFor(model => model[2].AnswerText, "", new { @class = "error" })
+                </div>
+
+                <div class="col-md-6">
+                    @Html.Label("D:") @Html.TextBoxFor(model => model[3].AnswerText, new { @class = "form-control", @placeholder = "D" })
+                    @Html.ValidationMessageFor(model => model[3].AnswerText, "", new { @class = "error" })
+                </div>
+            </div>
+        </div>
+        <p style="margin-top:10px; width:200px;">
+            @Html.DropDownList("Option", "Doğru cevap seçiniz")
+        </p>
+
+
+        <div class="ayrac"></div>
+
+        @Html.TextBoxFor(model => model[4].QuestionExam, new { @class = "form-control shape", @placeholder = "Soru 2:" })
+        @Html.ValidationMessageFor(model => model[4].QuestionExam, "", new { @class = "error" })
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("A:") @Html.TextBoxFor(model => model[4].AnswerText, new { @class = "form-control", @placeholder = "A" })
+                    @Html.ValidationMessageFor(model => model[4].AnswerText, "", new { @class = "error" })
+                </div>
+
+                <div class="col-md-6">
+                    @Html.Label("B:") @Html.TextBoxFor(model => model[5].AnswerText, new { @class = "form-control", @placeholder = "B" })
+                    @Html.ValidationMessageFor(model => model[5].AnswerText, "", new { @class = "error" })
+                </div>
+
+
+                <div class="col-md-6">
+                    @Html.Label("C:") @Html.TextBoxFor(model => model[6].AnswerText, new { @class = "form-control", @placeholder = "C" })
+                    @Html.ValidationMessageFor(model => model[6].AnswerText, "", new { @class = "error" })
+                </div>
+
+                <div class="col-md-6">
+                    @Html.Label("D:") @Html.TextBoxFor(model => model[7].AnswerText, new { @class = "form-control", @placeholder = "D" })
+                    @Html.ValidationMessageFor(model => model[8].AnswerText, "", new { @class = "error" })
+                </div>
+            </div>
+        </div>
+        <p style="margin-top:10px; width:200px;">
+            @Html.DropDownList("Option", "-- Doğru cevap seçiniz --")
+        </p>
+
+
+        <div class="ayrac"></div>
+
+
+        @Html.TextBoxFor(model => model[8].QuestionExam, new { @class = "form-control shape", @placeholder = "Soru 3:" })
+        @Html.ValidationMessageFor(model => model[8].QuestionExam, "", new { @class = "error" })
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("A:")@Html.TextBoxFor(model => model[8].AnswerText, new { @class = "form-control", @placeholder = "A" })
+                    @Html.ValidationMessageFor(model => model[8].AnswerText, "", new { @class = "error" })
+                </div>
+
+                <div class="col-md-6">
+                    @Html.Label("B:") @Html.TextBoxFor(model => model[9].AnswerText, new { @class = "form-control", @placeholder = "B" })
+                    @Html.ValidationMessageFor(model => model[9].AnswerText, "", new { @class = "error" })
+                </div>
+
+
+                <div class="col-md-6">
+                    @Html.Label("C:") @Html.TextBoxFor(model => model[10].AnswerText, new { @class = "form-control", @placeholder = "C" })
+                    @Html.ValidationMessageFor(model => model[10].AnswerText, "", new { @class = "error" })
+                </div>
+
+                <div class="col-md-6">
+                    @Html.Label("D:") @Html.TextBoxFor(model => model[11].AnswerText, new { @class = "form-control", @placeholder = "D" })
+                    @Html.ValidationMessageFor(model => model[11].AnswerText, "", new { @class = "error" })
+                </div>
+            </div>
+        </div>
+        <p style="margin-top:10px; width:200px;">
+            @Html.DropDownList("Option", "-- Doğru cevap seçiniz --")
+        </p>
+
+        <div class="ayrac"></div>
+
+
+        @Html.TextBoxFor(model => model[12].QuestionExam, new { @class = "form-control shape", @placeholder = "Soru 4:" })
+        @Html.ValidationMessageFor(model => model[12].QuestionExam, "", new { @class = "error" })
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.Label("A:") @Html.TextBoxFor(model => model[12].AnswerText, new { @class = "form-control", @placeholder = "A" })
+                    @Html.ValidationMessageFor(model => model[12].AnswerText, "", new { @class = "error" })
+                </div>
+
+                <div class="col-md-6">
+                    @Html.Label("B:") @Html.TextBoxFor(model => model[13].AnswerText, new { @class = "form-control", @placeholder = "B" })
+                    @Html.ValidationMessageFor(model => model[13].AnswerText, "", new { @class = "error" })
+                </div>
+
+
+                <div class="col-md-6">
+                    @Html.Label("C:") @Html.TextBoxFor(model => model[14].AnswerText, new { @class = "form-control", @placeholder = "C" })
+                    @Html.ValidationMessageFor(model => model[14].AnswerText, "", new { @class = "error" })
+                </div>
+
+                <div class="col-md-6">
+                    @Html.Label("D:") @Html.TextBoxFor(model => model[15].AnswerText, new { @class = "form-control", @placeholder = "D" })
+                    @Html.ValidationMessageFor(model => model[15].AnswerText, "", new { @class = "error" })
+                </div>
+            </div>
+        </div>
+        <p style="margin-top:10px; width:200px;">   @Html.DropDownList("Option", "-- Doğru cevap seçiniz --")</p>
+
+
+        <div class="ayrac"></div>
+
+        <div>
+            <input type="submit" value="Soru Oluştur" class="btn-block btn-info btn" />
+        </div>
+        }
+
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,88 @@
+﻿@model SınavProjesi.Models.User
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    <link rel="alternate" type="application/atom+xml" title="Title of the Feed" href="https://www.wired.com/feed/rss">
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+
+    <style>
+     
+        body{
+            background:url("https://www.highreshdwallpapers.com/wp-content/uploads/2014/05/Minimalist-Blue-Waves-1920x1080.jpg") no-repeat;
+        }
+        .middle {
+            margin: auto;
+            width: 30%;
+            height:50%;
+            border: 5px solid rgba(131, 198, 248, 0.44);
+            padding: 40px;
+            font-size:medium;
+                vertical-align:middle;
+
+        }
+
+        .tbl{
+            margin: auto;
+            /*width: 30%;*/
+            padding: 10px;
+        }
+
+        .btn {
+        }
+    </style>
+
+</head>
+<body>
+
+    @using (Html.BeginForm("Login", "User", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken();
+        @Html.ValidationSummary();
+        if (@ViewBag.Message != null)
+        {
+            <div style="border: 1px solid dashed">
+                @ViewBag.Message
+            </div>
+        }
+        <div class="middle">
+            <p style="text-align:center;font-size:larger;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Kullanıcı Girişi</p>
+            <table class="tbl">
+                <tr>
+                    <td></td>
+                    <td>@Html.TextBoxFor(a => a.UserName,new { @placeholder = "Kullanıcı Adı" })</td>
+                    <td>@Html.ValidationMessageFor(a => a.UserName)</td>
+                </tr>
+
+                <tr>
+                    <td>
+                       
+                    </td>
+                    <td>@Html.PasswordFor(a => a.Password, new { @placeholder = "Şifre" })</td>
+                    <td>@Html.ValidationMessageFor(a => a.Password)</td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+                        <div class="container">
+                            
+                            <input type="submit" value="Giriş Yap" class="btn-block btn-default btn"  />
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+
+            </table>
+        </div>
+
+    }
+
+</body>
+</html>

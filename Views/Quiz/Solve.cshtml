@@ -1,0 +1,107 @@
+﻿@model SınavProjesi.Models.Test
+
+
+@{
+    ViewBag.Title = "--Quiz Tamamlama--";
+    Layout = "~/Views/Shared/_KullaniciMaster.cshtml";
+}
+
+<h2>Solve</h2>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Konuşarak Öğren</title>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+
+
+    <style>
+        .question {
+            color: mediumslateblue;
+        }
+
+        .ayrac {
+            margin: 30px;
+        }
+
+        .blue {
+            background: blue;
+        }
+
+        .middle {
+            display: block;
+            margin: auto;
+            width: 200px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <dt>
+        @Html.DisplayNameFor(model => model.Name)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+    <div class="ayrac"></div>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Description)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Description)
+    </dd>
+    <div class="ayrac"></div>
+
+    <div class="container">
+        <div class="row">
+            @foreach (var q in Model.Questions)
+            {
+
+                <div class="col-md-6">
+                    <div class="question">
+                        <div class="ayrac"></div>
+                        @Html.Label(q.QuestionExam)
+                    </div>
+                    @foreach (var a in q.Answers)
+                    {
+                        <div id="itemList" class="@a.AnswerID">
+                            <input id="@a.AnswerID" name="cbOption" type="checkbox" value=@a.Correct.ToString()>
+                            <label id="cbOption" for="cbOption">&nbsp; @Html.Label(a.Text)</label>
+
+                            <script>
+                                var SaveList = function () {
+                                    var id = "";
+                                $("#itemList input[type=checkbox]").each(function (index, val) {
+
+                                    if (val.checked == true && val.value == "True") {
+                                        alert("dd")
+                                        id = "." + val.id;
+                                        $(id).css("background-color", "green").show(1500);
+
+                                    }
+                                });
+                            }
+                            </script>
+
+                        </div>
+
+                      
+                    }
+
+                </div>
+            }
+        </div>
+    </div>
+
+    <input type="submit" value="Sınavı Tamamla" onclick="SaveList()" class="btn-block btn-info btn" />
+
+</body>
+
+</html>
